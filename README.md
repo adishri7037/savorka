@@ -74,3 +74,4 @@ npm run build
 - Mobile: < 640px — single column, stacked layout
 - Tablet: 640–1024px — 2-column grids
 - Desktop: > 1024px — full layout as per design
+"# savorka-main" 
