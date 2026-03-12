@@ -123,11 +123,33 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-800 py-5 text-center">
-          <p className="text-gray-500 text-xs">
-            Copyright © 2026 Savorka Solar, All rights reserved.
-          </p>
-        </div>
+<div className="border-t border-gray-800 py-5 text-center space-y-2">
+  <div className="flex justify-center gap-6 text-xs text-gray-400">
+    
+    <a
+      href="/terms-and-conditions"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-white transition-colors"
+    >
+      Terms & Conditions
+    </a>
+
+    <a
+      href="/privacy-policy"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-white transition-colors"
+    >
+      Privacy Policy
+    </a>
+
+  </div>
+
+  <p className="text-gray-500 text-xs">
+    Copyright © 2026 Savorka Solar, All rights reserved.
+  </p>
+</div>
       </div>
     </footer>
   );

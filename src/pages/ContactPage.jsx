@@ -45,13 +45,13 @@ const Contact = () => {
       {/* ABOUT */}
       <section className="text-center px-5 py-8">
         <h2 className="text-[#0c7812] font-medium text-[clamp(24px,5vw,40px)] leading-tight mb-3">
-          About Us
+          Contact Us
         </h2>
         <h3 className="text-[#117816] font-medium text-[clamp(18px,4vw,30px)] mb-4">
           Building Sustainable Energy Solutions for Every Sector
         </h3>
         <p className="max-w-[750px] mx-auto text-[#252424]">
-          At Savorka Solar, our approach goes beyond installation. We focus on engineering reliability, long-term performance, and customer satisfaction through state-of-the-art technology and expert execution.
+          Founded in 2016 and headquartered in Noida, Savorka is committed to delivering sustainable solar energy solutions to businesses and homes across India. We deliver innovative solar solutions that maximize efficiency, reduce energy costs, and support long-term sustainability goals.
         </p>
       </section>
 

@@ -7,6 +7,7 @@ import service1 from "../assets/serviceimg1.png";
 import service2 from "../assets/serviceimg1.png";
 import service3 from "../assets/serviceimg1.png";
 import service4 from "../assets/serviceimg1.png";
+import { AboutHero } from "../pages/AboutPage";
 
 const ServicesSection = () => {
   const services = [
@@ -33,7 +34,10 @@ const ServicesSection = () => {
   ];
 
   return (
+    <>
+     <AboutHero />
     <section className="bg-[#f4f6f0] px-5 sm:px-10 py-10">
+
       {/* Top — heading left, image right */}
       <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mb-8">
         <div className="flex-1 max-w-xl">
@@ -41,7 +45,7 @@ const ServicesSection = () => {
             Our Services
           </h2>
           <p className="text-gray-600 leading-relaxed text-base sm:text-lg">
-            We are among the largest EPC contractors in the country that delivers high-performance On-Grid, Off-Grid, and Hybrid solar systems. With 150+ MWp installed capacity and 70+ satisfied clients, we don't just install solar – we power long-term, sustainable energy solutions.
+            We're among the largest EPC contractor in the country that delivers high-performance On-Grid, Off-Grid, and Hybrid solar systems. With 150+ MWp installed capacity and 70+ satisfied clients, we don’t just install solar - we power long-term, sustainable energy solutions.  
           </p>
         </div>
         <div className="flex-1 flex justify-center">
@@ -87,6 +91,7 @@ const ServicesSection = () => {
         <ContactFormSection />
       </div>
     </section>
+    </>
   );
 };
 

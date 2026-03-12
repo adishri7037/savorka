@@ -20,8 +20,12 @@ const PurposeCard = ({ icon, text, bgColor }) => (
 );
 
 export const AboutHero = () => (
-  <div className="flex justify-center" style={{ backgroundColor: "#f3f3ed" }}>
-    <img src={heroimg} alt="About hero" className="w-[95%] max-h-[500px] min-h-[250px] object-contain rounded-b-3xl" />
+  <div className="w-full bg-[#f3f3ed]">
+    <img
+      src={heroimg}
+      alt="About hero"
+      className="w-full h-[250px] sm:h-[350px] md:h-[450px] object-cover rounded-b-3xl"
+    />
   </div>
 );
 

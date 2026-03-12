@@ -13,6 +13,10 @@ import Login from "./admin/Login";
 import Dashboard from "./admin/Dashboard";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import "./styles/index.css";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+import TermsAndConditions from "./pages/TermsAndConditions";
+<Route path="/terms-and-conditions" element={<TermsAndConditions />} />
 
 function App() {
   return (
