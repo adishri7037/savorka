@@ -17,8 +17,27 @@ const SERVICES = [
 ];
 
 const Footer = () => {
-  const [email, setEmail] = useState("");
+
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = () => {
+    if (!name.trim() || !email.trim()) {
+      alert("Please enter both your name and email address.");
+      return;
+    }
+
+    // Basic email format check
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    alert(`🎉 Thank you, ${name}! You've successfully subscribed to our newsletter.`);
+    setName("");
+    setEmail("");
+  };
 
   return (
     <footer className="bg-dark text-white pt-14 pb-0">
@@ -110,11 +129,8 @@ const Footer = () => {
                 className="w-full px-3 py-2.5 rounded-lg text-xs bg-gray-800 border border-gray-700 text-white placeholder-gray-500 outline-none focus:border-primary transition-colors"
               />
               <button
-                onClick={() => {
-                  setName("");
-                  setEmail("");
-                }}
-               className="w-full py-2.5 rounded-lg font-heading font-bold text-xs text-[#003260] transition-opacity hover:opacity-90 bg-[linear-gradient(90deg,#76c442,#4caf50)]"
+                onClick={handleSubscribe}
+                className="w-full py-2.5 rounded-lg font-heading font-bold text-xs text-[#003260] transition-opacity hover:opacity-90 bg-[linear-gradient(90deg,#76c442,#4caf50)]"
               >
                 Subscribe
               </button>
@@ -123,33 +139,38 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-<div className="border-t border-gray-800 py-5 text-center space-y-2">
-  <div className="flex justify-center gap-6 text-xs text-gray-400">
-    
-    <a
-      href="/terms-and-conditions"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="hover:text-white transition-colors"
-    >
-      Terms & Conditions
-    </a>
+        {/* Divider */}
+        <div className="border-t border-gray-800 py-5 text-center space-y-2">
 
-    <a
-      href="/privacy-policy"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="hover:text-white transition-colors"
-    >
-      Privacy Policy
-    </a>
+          <div className="flex justify-center gap-6 text-xs text-gray-400">
 
-  </div>
+            <a
+              href="/terms-and-conditions"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Terms & Conditions
+            </a>
 
-  <p className="text-gray-500 text-xs">
-    Copyright © 2026 Savorka Solar, All rights reserved.
-  </p>
-</div>
+            <span className="text-gray-600">|</span>
+
+            <a
+              href="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Privacy Policy
+            </a>
+
+          </div>
+
+          <p className="text-gray-500 text-xs">
+            Copyright © 2026 Savorka Solar, All rights reserved.
+          </p>
+
+        </div>
       </div>
     </footer>
   );

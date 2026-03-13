@@ -25,6 +25,37 @@ const ContactFormSection = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!form.name.trim()) {
+      alert("Please enter your Full Name");
+      return;
+    }
+
+    if (!form.whatsapp.trim()) {
+      alert("Please enter your WhatsApp Number");
+      return;
+    }
+
+    if (!form.pincode.trim()) {
+      alert("Please enter your Pincode");
+      return;
+    }
+
+    if (activeTab === 0 && selectedBill === null) {
+      alert("Please select your Average Monthly Bill");
+      return;
+    }
+
+    if (activeTab === 1 && selectedDesignation === null) {
+      alert("Please select your Designation");
+      return;
+    }
+
+    if (!agreed) {
+      alert("Please agree to the Terms of Service");
+      return;
+    }
+
     alert("Thank you! We will contact you shortly.");
   };
 
@@ -38,14 +69,12 @@ const ContactFormSection = () => {
 
         {/* LEFT SIDE */}
         <div className="flex-1">
-
           <h2 className="font-heading font-black text-dark text-base md:text-xl leading-tight mb-4">
             Let the Sun power your future,
             <br />
             Switch to Solar with complete confidence.
           </h2>
 
-          {/* Hide image only on small mobile */}
           <div className="my-6 hidden sm:block">
             <img
               src={ContackLayer}
@@ -63,42 +92,35 @@ const ContactFormSection = () => {
             Take the first step toward clean, cost-saving solar energy with a
             free consultation from SAVORKA.
           </p>
-
         </div>
 
         {/* Divider */}
-        <div
-          className="hidden md:block"
-          style={{
-            width: "5px",
-            backgroundColor: "#ffffff",
-          }}
-        />
+        <div className="hidden md:block" style={{ width: "5px", backgroundColor: "#ffffff" }} />
 
         {/* RIGHT SIDE FORM */}
         <div
-          className="flex-1 rounded-2xl p-4 md:p-8"
-          style={{
-            background: "#F6FCD0",
-            border: "1px solid #eafcd9",
-          }}
+          className="flex-1 rounded-2xl  md:p-8"
+          style={{ background: "#F6FCD0", border: "1px solid #eafcd9" }}
         >
 
           {/* Tabs */}
           <div
-            className="flex flex-wrap md:flex-nowrap rounded-xl overflow-hidden mb-6"
+            className="flex rounded-xl overflow-hidden mb-6"
             style={{ border: "1.5px solid #ccc" }}
           >
             {TABS.map((tab, i) => (
               <button
                 key={i}
-                onClick={() => setActiveTab(i)}
+                onClick={() => {
+                  setActiveTab(i);
+                  setSelectedBill(null);
+                  setSelectedDesignation(null);
+                }}
                 className={`flex-1 py-2 text-xs font-heading font-bold transition
-                ${
-                  activeTab === i
-                    ? "bg-navy text-white"
-                    : "bg-white text-gray-600 hover:bg-gray-50"
-                }`}
+                  ${activeTab === i
+                    ? "text-green-600"
+                    : "text-gray-600 hover:bg-gray-50"
+                  }`}
               >
                 {tab}
               </button>
@@ -107,150 +129,207 @@ const ContactFormSection = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4">
 
-            {/* FULL NAME */}
-            <div>
-              <label className="text-xs font-semibold text-gray-700">
-                Full Name *
-              </label>
-              <input
-                type="text"
-                placeholder="Enter your Full Name"
-                value={form.name}
-                onChange={(e) =>
-                  setForm({ ...form, name: e.target.value })
-                }
-                className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200"
-              />
-            </div>
-
-            {/* HOUSING SOCIETY NAME */}
-            {activeTab === 1 && (
-              <div>
-                <label className="text-xs font-semibold text-gray-700">
-                  Name of Housing Society *
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Housing Society Name"
-                  className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200"
-                />
-              </div>
-            )}
-
-            {/* COMPANY NAME */}
-            {activeTab === 2 && (
-              <div>
-                <label className="text-xs font-semibold text-gray-700">
-                  Company Name *
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Company Name"
-                  className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200"
-                />
-              </div>
-            )}
-
-            {/* CITY + PINCODE */}
-            {activeTab === 2 ? (
-              <div className="grid grid-cols-2 gap-3">
+            {/* RESIDENTIAL — Name + Pincode in 2 cols on mobile */}
+            {activeTab === 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
                 <div>
-                  <label className="text-xs font-semibold text-gray-700">
-                    City *
-                  </label>
+                  <label className="text-xs font-semibold text-gray-700">Full Name *</label>
                   <input
                     type="text"
-                    placeholder="Enter City"
-                    className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200"
+                    placeholder="Enter Full Name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
                   />
                 </div>
-
                 <div>
-                  <label className="text-xs font-semibold text-gray-700">
-                    Pincode *
-                  </label>
+                  <label className="text-xs font-semibold text-gray-700">Pincode *</label>
                   <input
                     type="text"
                     placeholder="Enter Pincode"
                     value={form.pincode}
-                    onChange={(e) =>
-                      setForm({ ...form, pincode: e.target.value })
-                    }
-                    className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200"
+                    onChange={(e) => setForm({ ...form, pincode: e.target.value })}
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
                   />
                 </div>
               </div>
-            ) : (
+            )}
+
+            {/* HOUSING SOCIETY — Name + Society in 2 cols on mobile */}
+            {activeTab === 1 && (
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">Full Name *</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Full Name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">Society Name *</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Society Name"
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* COMMERCIAL — Name + Company in 2 cols on mobile */}
+            {activeTab === 2 && (
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">Full Name *</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Full Name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">Company Name *</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Company Name"
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* CITY + PINCODE — Commercial (always 2 cols) */}
+            {activeTab === 2 && (
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">City *</label>
+                  <input
+                    type="text"
+                    placeholder="Enter City"
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">Pincode *</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Pincode"
+                    value={form.pincode}
+                    onChange={(e) => setForm({ ...form, pincode: e.target.value })}
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* HOUSING SOCIETY — Pincode + WhatsApp in 2 cols on mobile */}
+            {activeTab === 1 && (
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">Pincode *</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Pincode"
+                    value={form.pincode}
+                    onChange={(e) => setForm({ ...form, pincode: e.target.value })}
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">WhatsApp *</label>
+                  <input
+                    type="tel"
+                    placeholder="WhatsApp Number"
+                    value={form.whatsapp}
+                    onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* RESIDENTIAL — WhatsApp full width */}
+            {activeTab === 0 && (
               <div>
-                <label className="text-xs font-semibold text-gray-700">
-                  Pincode *
-                </label>
+                <label className="text-xs font-semibold text-gray-700">WhatsApp Number *</label>
                 <input
-                  type="text"
-                  placeholder="Enter your Pincode"
-                  value={form.pincode}
-                  onChange={(e) =>
-                    setForm({ ...form, pincode: e.target.value })
-                  }
-                  className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200"
+                  type="tel"
+                  placeholder="Enter your WhatsApp Number"
+                  value={form.whatsapp}
+                  onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                  className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
                 />
               </div>
             )}
 
-            {/* WHATSAPP */}
-            <div>
-              <label className="text-xs font-semibold text-gray-700">
-                WhatsApp Number *
-              </label>
-              <input
-                type="tel"
-                placeholder="Enter your WhatsApp Number"
-                value={form.whatsapp}
-                onChange={(e) =>
-                  setForm({ ...form, whatsapp: e.target.value })
-                }
-                className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200"
-              />
-            </div>
-
-            {/* HOUSING SOCIETY BILL */}
-            {activeTab === 1 && (
-              <div>
-                <label className="text-xs font-semibold text-gray-700">
-                  Monthly Electricity Bill *
-                </label>
-                <select className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200">
-                  <option>0 - 50000</option>
-                  <option>50000 - 100000</option>
-                  <option>100000+</option>
-                </select>
+            {/* COMMERCIAL — WhatsApp + Monthly Bill in 2 cols on mobile */}
+            {activeTab === 2 && (
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">WhatsApp *</label>
+                  <input
+                    type="tel"
+                    placeholder="WhatsApp Number"
+                    value={form.whatsapp}
+                    onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">Monthly Bill *</label>
+                  <input
+                    type="text"
+                    placeholder="Avg Monthly Bill"
+                    className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none"
+                  />
+                </div>
               </div>
             )}
 
-            {/* DESIGNATION */}
+            {/* HOUSING SOCIETY BILL + AGM in 2 cols on mobile */}
+            {activeTab === 1 && (
+              <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">Monthly Bill *</label>
+                  <select className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none">
+                    <option>0 - 50,000</option>
+                    <option>50,000 - 1,00,000</option>
+                    <option>1,00,000+</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-gray-700">AGM Status *</label>
+                  <select className="w-full mt-1 px-3 py-2 rounded-lg text-xs md:text-sm bg-white border border-gray-200 outline-none">
+                    <option>AGM approved</option>
+                    <option>No AGM approval yet</option>
+                    <option>Need help for AGM</option>
+                  </select>
+                </div>
+              </div>
+            )}
+
+            {/* DESIGNATION chips */}
             {activeTab === 1 && (
               <div>
                 <label className="text-xs font-semibold text-gray-700 mb-2 block">
-                  What is your designation in Housing Society? *
+                  Your Designation *
                 </label>
-
-                <div className="grid grid-cols-2 md:flex flex-wrap gap-2">
-                  {[
-                    "Management committee member",
-                    "Resident",
-                    "Builder",
-                    "Facility Manager",
-                  ].map((role, i) => (
+                <div className="grid grid-cols-2 gap-2">
+                  {["Management Committee", "Resident", "Builder", "Facility Manager"].map((role, i) => (
                     <button
                       type="button"
                       key={i}
                       onClick={() => setSelectedDesignation(i)}
-                      className={`px-3 py-2 rounded-lg text-xs border
-                      ${
-                        selectedDesignation === i
+                      className={`px-3 py-2 rounded-lg text-xs border font-medium transition
+                        ${selectedDesignation === i
                           ? "bg-primary text-white border-primary"
                           : "bg-white text-gray-600 border-gray-200"
-                      }`}
+                        }`}
                     >
                       {role}
                     </button>
@@ -259,54 +338,23 @@ const ContactFormSection = () => {
               </div>
             )}
 
-            {/* AGM */}
-            {activeTab === 1 && (
-              <div>
-                <label className="text-xs font-semibold text-gray-700">
-                  AGM approval status *
-                </label>
-
-                <select className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200">
-                  <option>We already have AGM approval</option>
-                  <option>We don't have an AGM approval yet</option>
-                  <option>We want help in preparing for our AGM</option>
-                </select>
-              </div>
-            )}
-
-            {/* COMMERCIAL BILL */}
-            {activeTab === 2 && (
-              <div>
-                <label className="text-xs font-semibold text-gray-700">
-                  Average Monthly Bill *
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Average Monthly Bill"
-                  className="w-full mt-1 px-4 py-2 rounded-lg text-sm bg-white border border-gray-200"
-                />
-              </div>
-            )}
-
-            {/* RESIDENTIAL BILL */}
+            {/* RESIDENTIAL BILL chips */}
             {activeTab === 0 && (
               <div>
                 <label className="text-xs font-semibold text-gray-700 mb-2 block">
-                  What is your average monthly bill?
+                  Average Monthly Bill *
                 </label>
-
-                <div className="grid grid-cols-2 md:flex flex-wrap gap-2">
+                <div className="grid grid-cols-2 gap-2">
                   {BILL_OPTIONS.map((opt, i) => (
                     <button
                       type="button"
                       key={i}
                       onClick={() => setSelectedBill(i)}
-                      className={`px-3 py-2 rounded-lg text-xs border
-                      ${
-                        selectedBill === i
+                      className={`px-3 py-2 rounded-lg text-xs border font-medium transition
+                        ${selectedBill === i
                           ? "bg-primary text-white border-primary"
                           : "bg-white text-gray-600 border-gray-200"
-                      }`}
+                        }`}
                     >
                       {opt}
                     </button>
@@ -324,7 +372,7 @@ const ContactFormSection = () => {
                 className="w-4 h-4 accent-navy"
               />
               <span className="text-xs text-gray-600">
-                I agree to Sarvoka's Terms of Service & Policies.
+                I agree to Savorka's Terms of Service & Policies.
               </span>
             </div>
 

@@ -9,19 +9,19 @@ import AboutPage from "./pages/AboutPage";
 import ServicesPage from "./pages/ServicesPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import ContactPage from "./pages/ContactPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import ServiceDetails from "./pages/ServiceDetails";
+
 import Login from "./admin/Login";
 import Dashboard from "./admin/Dashboard";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import "./styles/index.css";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-<Route path="/privacy-policy" element={<PrivacyPolicy />} />
-import TermsAndConditions from "./pages/TermsAndConditions";
-<Route path="/terms-and-conditions" element={<TermsAndConditions />} />
 
 function App() {
   return (
     <>
-      <ScrollToTop /> {/* Scrolls to top on every route change */}
+      <ScrollToTop />
       <Routes>
 
         {/* Public Website Layout */}
@@ -39,6 +39,13 @@ function App() {
                   <Route path="/services" element={<ServicesPage />} />
                   <Route path="/projects" element={<ProjectsPage />} />
                   <Route path="/contact" element={<ContactPage />} />
+                  <Route path="/service/:id" element={<ServiceDetails />} />
+
+
+                  {/* Legal Pages */}
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+
                 </Routes>
               </div>
 

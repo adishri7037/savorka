@@ -4,12 +4,57 @@ import sideimg from "../assets/banner.png";
 import ContactFormSection from "../components/ContactFormSection";
 
 const Contact = () => {
-  const [isAgreed, setIsAgreed] = useState(false); // Track checkbox state
+
+  const [isAgreed, setIsAgreed] = useState(false);
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    company: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const isFormComplete =
+    formData.fullName &&
+    formData.company &&
+    formData.phone &&
+    formData.email &&
+    formData.subject &&
+    formData.message &&
+    isAgreed;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!isAgreed) return; // Extra safety
-    alert("Form submitted!");
+
+    if (!isFormComplete) {
+      alert("Please fill all fields and agree to the policy.");
+      return;
+    }
+
+    alert("Form submitted successfully!");
+
+    // reset form
+    setFormData({
+      fullName: "",
+      company: "",
+      phone: "",
+      email: "",
+      subject: "",
+      message: ""
+    });
+
+    setIsAgreed(false);
   };
 
   const teamMembers = [
@@ -51,7 +96,7 @@ const Contact = () => {
           Building Sustainable Energy Solutions for Every Sector
         </h3>
         <p className="max-w-[750px] mx-auto text-[#252424]">
-          Founded in 2016 and headquartered in Noida, Savorka is committed to delivering sustainable solar energy solutions to businesses and homes across India. We deliver innovative solar solutions that maximize efficiency, reduce energy costs, and support long-term sustainability goals.
+          Founded in 2016 and headquartered in Noida, Savorka is committed to delivering sustainable solar energy solutions to businesses and homes across India.
         </p>
       </section>
 
@@ -74,7 +119,7 @@ const Contact = () => {
       {/* CONTACT SECTION */}
       <section className="flex flex-wrap justify-center items-start gap-[clamp(20px,5vw,80px)] px-5 py-12 bg-[#f3f3ed]">
 
-        {/* IMAGE SIDE */}
+        {/* IMAGE */}
         <div className="relative">
           <div className="p-3 rounded-[80px_20px_80px_20px]">
             <img
@@ -85,48 +130,70 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* FORM SIDE */}
+        {/* FORM */}
         <form
           className="w-[clamp(280px,90vw,420px)]"
           onSubmit={handleSubmit}
         >
+
           <div className="flex flex-wrap gap-[clamp(10px,3vw,20px)] mb-4">
+
             <div className="flex-1 flex flex-col text-[12px]">
               <label>Full Name:</label>
               <input
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
                 className="mt-1 p-1 border border-[#ccc] rounded"
                 placeholder="Enter your Full Name"
               />
             </div>
+
             <div className="flex-1 flex flex-col text-[12px]">
               <label>Company Name:</label>
               <input
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
                 className="mt-1 p-1 border border-[#ccc] rounded"
                 placeholder="Enter your Company Name"
               />
             </div>
+
           </div>
 
           <div className="flex flex-wrap gap-[clamp(10px,3vw,20px)] mb-4">
+
             <div className="flex-1 flex flex-col text-[12px]">
               <label>Phone:</label>
               <input
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
                 className="mt-1 p-1 border border-[#ccc] rounded"
                 placeholder="Enter your Phone"
               />
             </div>
+
             <div className="flex-1 flex flex-col text-[12px]">
               <label>Email ID:</label>
               <input
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 className="mt-1 p-1 border border-[#ccc] rounded"
                 placeholder="Enter your Email ID"
               />
             </div>
+
           </div>
 
           <div className="flex flex-col mb-4">
             <label>Subject:</label>
             <input
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
               className="mt-1 p-2 border border-[#ccc] rounded"
               placeholder="Enter your Subject"
             />
@@ -135,12 +202,15 @@ const Contact = () => {
           <div className="flex flex-col mb-4">
             <label>Message:</label>
             <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
               className="mt-1 p-2 border border-[#ccc] rounded min-h-[90px]"
               placeholder="Enter your Message"
             />
           </div>
 
-          {/* AGREEMENT CHECKBOX */}
+          {/* CHECKBOX */}
           <div className="flex items-center gap-2 text-[12px] mb-5">
             <input
               type="checkbox"
@@ -148,58 +218,66 @@ const Contact = () => {
               onChange={(e) => setIsAgreed(e.target.checked)}
               id="agree"
             />
-            <label htmlFor="agree" className="cursor-pointer">
+            <label htmlFor="agree">
               I agree to Savorka's Terms of Service & Policies.
             </label>
           </div>
 
-          {/* SUBMIT BUTTON */}
+          {/* BUTTON */}
           <button
             type="submit"
-            disabled={!isAgreed}
+            disabled={!isFormComplete}
             className={`bg-[#2c8d06] text-white py-2 px-4 rounded transition-all duration-200
-              ${!isAgreed ? "cursor-not-allowed opacity-50 blur-s" : "cursor-pointer opacity-100 blur-0"}`}
+            ${!isFormComplete ? "cursor-not-allowed opacity-50" : "cursor-pointer opacity-100"}`}
           >
             Submit
           </button>
+
         </form>
+
       </section>
 
-      {/* TEAM SECTION */}
+      {/* TEAM */}
       <section className="text-center py-16 bg-[#f6f6f0] px-5">
+
         <h2 className="text-[#2c8d06] font-medium text-[clamp(24px,5vw,35px)] mb-2">
           Meet our Team
         </h2>
-        <div className="w-[clamp(200px,80vw,500px)] h-[1px] bg-[#9c9f9c] mx-auto rounded mb-4"></div>
-        <h3 className="text-[#2e8033] font-medium text-[clamp(16px,3vw,22px)] mb-2">
-          Building Sustainable Energy Solutions for Every Sector
-        </h3>
-        <p className="max-w-[700px] mx-auto text-[#555] text-[14px] mb-10">
-          At Savorka Solar, our approach goes beyond installation. We focus on engineering reliability, long-term performance, and customer satisfaction through state-of-the-art technology and expert execution.
-        </p>
 
         <div className="flex flex-wrap justify-center gap-8">
+
           {teamMembers.map((member, index) => (
             <div
               key={index}
               className="bg-white rounded-lg shadow-lg w-52 overflow-hidden pb-5"
             >
               <div className="h-20 bg-[#6fbe4f]"></div>
+
               <img
                 src={member.img}
                 alt={member.name}
                 className="w-28 h-28 rounded-full border-4 border-white -mt-14 mx-auto object-cover"
               />
-              <h4 className="mt-2 font-semibold text-[#0c7812]">{member.name}</h4>
-              <p className="text-[#777] text-[14px]">{member.role}</p>
+
+              <h4 className="mt-2 font-semibold text-[#0c7812]">
+                {member.name}
+              </h4>
+
+              <p className="text-[#777] text-[14px]">
+                {member.role}
+              </p>
+
             </div>
           ))}
+
         </div>
+
       </section>
 
-    <section className="px-16 py-12">
-      <ContactFormSection />
-    </section>
+      <section className="px-16 py-12">
+        <ContactFormSection />
+      </section>
+
     </div>
   );
 };
