@@ -113,7 +113,7 @@ const Login = () => {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Sora:wght@600;700&display=swap');
         * { box-sizing: border-box; }
-        .login-root { font-family: 'DM Sans', system-ui, sans-serif; }
+        .login-root { font-family: 'DM Sans', system-ui, Manrope; }
         .login-card {
           background: rgba(255,255,255,0.68);
           backdrop-filter: blur(24px);
@@ -126,7 +126,7 @@ const Login = () => {
           width: 100%;
           padding: 12px 14px 12px 42px;
           font-size: 14px;
-          font-family: 'DM Sans', system-ui, sans-serif;
+          font-family: 'DM Sans', system-ui, Manrope;
           background: rgba(255,255,255,0.72);
           border: 1.5px solid #e5e7eb;
           border-radius: 14px;
@@ -145,7 +145,7 @@ const Login = () => {
           padding: 14px;
           background: #111827;
           color: #fff;
-          font-family: 'DM Sans', system-ui, sans-serif;
+          font-family: 'DM Sans', system-ui, Manrope;
           font-size: 14.5px;
           font-weight: 600;
           border: none;
@@ -204,7 +204,7 @@ const Login = () => {
           cursor: pointer;
           font-size: 12.5px;
           color: #6b7280;
-          font-family: 'DM Sans', system-ui, sans-serif;
+          font-family: 'DM Sans', system-ui, Manrope;
           padding: 0;
           transition: color 0.15s;
         }
@@ -259,7 +259,7 @@ const Login = () => {
           {/* Heading */}
           <div style={{ textAlign: 'center', marginBottom: '26px' }}>
             <h1 style={{
-              fontFamily: "'Sora', sans-serif",
+              fontFamily: "'Sora', Manrope",
               fontSize: 22,
               fontWeight: 700,
               color: '#111827',

@@ -171,7 +171,7 @@ What is covered?
                     <h3 className="text-gray-900 font-bold text-base mb-2">
                       {svc.title}
                     </h3>
-                    <h4 className="text-gray-900 font-mono text-base mb-2">
+                    <h4 className="text-gray-900 Manropetext-base mb-2">
                       {svc.Subtitle}
                     </h4>
 

@@ -25,8 +25,8 @@ const AboutSection = () => {
     <section id="about-us" className="bg-[#F1F1EF] py-16 px-6 md:px-16">
       <div className="max-w-6xl mx-auto">
         <h2
-          className="font-[Monorope] font-bold text-center text-[#005B00]"
-          style={{ width: "auto", height: "auto", fontSize: "clamp(28px, 5vw, 45px)", lineHeight: "1.2" }}
+          className="font-[Manrope] font-bold text-center text-[#005B00]"
+          style={{ width: "auto", height: "auto", fontSize: "clamp(28px, 5vw, 35px)", lineHeight: "1.2" }}
         >
           Building Sustainable Energy Solutions for Every Sector
         </h2>
